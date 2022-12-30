@@ -2,16 +2,20 @@ import React, { useContext } from "react";
 import { Text, TouchableOpacity } from "react-native";
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-import {Context as AuthContext} from '../../context/AuthContext';
-import { Auth, AuthForm } from "../../components/AuthForm";
+import { Context as AuthContext } from '../../context/AuthContext';
+import { AuthForm } from "../../components/AuthForm";
 import { styles } from "./styles";
+import { Spacer } from "../../components/Spacer";
 
 interface LoginProps {
   navigation: NativeStackNavigationProp<any, any>;
 }
 
 export function Login({ navigation }: LoginProps){
-  const { login } = useContext(AuthContext);
+  const { login, errorMessage } = useContext(AuthContext);
+  
+  console.log(errorMessage);
+  
   function handleRegisterClick() {
     navigation.navigate("SignUp");
   }
@@ -26,6 +30,11 @@ export function Login({ navigation }: LoginProps){
       <TouchableOpacity onPress={handleRegisterClick}>
         <Text style={styles.link}>"Não possui conta? Crie uma agora!"</Text>
       </TouchableOpacity>
+      {errorMessage && (
+        <Spacer>
+          <Text style={styles.errorMessage}>{errorMessage}</Text>
+        </Spacer>
+      )}
     </>
   );
 }

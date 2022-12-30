@@ -13,11 +13,7 @@ import { THEME } from "../../theme";
 
 import { styles } from './styles';
 
-export interface Auth {
-  user: string;
-  name?: string;
-  password: string;
-}
+import { Auth } from "../../@types/auth";
 
 interface AuthFormProps {
   formTitle: string;
@@ -68,8 +64,8 @@ export function AuthForm({ formTitle, submitFormButtonText, submitFormButtonActi
     </Input.Root>
     <Spacer />
     <Button 
-      onPress={() => submitFormButtonAction({ user, password })} 
       title={submitFormButtonText}
+      onPress={() => submitFormButtonAction({ user, password })} 
     />
     <Spacer />
   </KeyboardAvoidingView>
